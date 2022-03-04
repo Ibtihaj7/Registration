@@ -26,11 +26,19 @@ exports.register = (req,res) => {
             throw error;
         }
         if(results.length  > 0 ){
-            return res.render('signUp');
+            return res.render('signUp',{
+                message:"the email is already used"
+            });
+            
         }else if(password!== repassword){
-            return res.render('signUp');
+            return res.render('signUp',{
+                message:"Password and comfirm password do not match"
+            });
         }else if(name===""||email===""||phone==="" ||password===""){
-            return res.render('signUp');
+            return res.render('signUp',
+            {
+                message:"you muast fill all the featuer"
+            })
         }
         db.query('INSERT INTO users SET ?',{name:name,email:email,phone:phone,password:password},(err,results) => {
             if(err){

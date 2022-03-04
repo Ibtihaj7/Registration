@@ -42,7 +42,7 @@
 
 
 
-    <div class="signUp">
+    < class="signUp">
       <form action="/auth/register" method="POST">
 
         <h2>Sign Up</h2>
@@ -82,10 +82,9 @@
         <i class="fa fa-linkedin" style="font-size: 24px;cursor: pointer"></i>
     </div>
       </form>
-    </div>
-    <!-- {{!-- {{#if}}
-    <h4>{{message}}</h4>
-    {{/if}} --}} -->
-    </div>
+ 
+    {{#if message}}
+      <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
   </body>
 </html>
