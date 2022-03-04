@@ -2,6 +2,8 @@ const mysql=require('mysql');
 const express=require('express');
 const app=express();
 
+const bcrypt = require('bcryptjs');
+
 app.set('view engine','hbs');
 app.use(express.static('public'));
 
@@ -20,7 +22,7 @@ exports.register = (req,res) => {
     const phone=req.body.phone;
     const password=req.body.password;
     const repassword=req.body.repassword;
-    
+
     db.query('SELECT email FROM users WHERE email = ?',[email],async(error,results) => {
         if(error){
             throw error;
@@ -40,7 +42,8 @@ exports.register = (req,res) => {
                 message:"you muast fill all the featuer"
             })
         }
-        db.query('INSERT INTO users SET ?',{name:name,email:email,phone:phone,password:password},(err,results) => {
+        let hashedPassword = await bcrypt.hash(password , 8);
+        db.query('INSERT INTO users SET ?',{name:name,email:email,phone:phone,password:hashedPassword},(err,results) => {
             if(err){
                 throw err;
             }else{
