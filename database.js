@@ -30,7 +30,7 @@ db.connect((err)=>{
 
 app.use('/',require('./routes/pages'));
 app.use('/auth',require('./routes/auth'));
-// app.use('/auth2',require('./routes/user'));
+app.use('/auth2',require('./routes/user'));
 
 
 app.listen(5001,() => {
