@@ -4,6 +4,9 @@ const app=express();
 
 const bcrypt = require('bcryptjs');
 
+const regeEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+const regePassword = /^(?=(.*[a-zA-Z]){1,})(?=(.*[0-9]){2,}).{8,}$/;
+
 app.set('view engine','hbs');
 app.use(express.static('public'));
 
@@ -42,6 +45,15 @@ exports.register = (req,res) => {
                 message:"you muast fill all the featuer"
             })
         }
+        else if(!(regeEmail.test(email))){
+            return res.render('signUp',{
+                message:"invalid Email"
+            });            
+        }else if(!(regePassword.test(password))){
+            return res.render('signUp',{
+                message:"invalid password"
+            });
+        }else{
         let hashedPassword = await bcrypt.hash(password , 8);
         db.query('INSERT INTO users SET ?',{name:name,email:email,phone:phone,password:hashedPassword},(err,results) => {
             if(err){
@@ -50,6 +62,7 @@ exports.register = (req,res) => {
                 return res.render('home')
             }
         });
+    }
     });
 
 }
