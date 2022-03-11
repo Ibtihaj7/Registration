@@ -20,8 +20,10 @@ form{
     background: rgba(0, 0, 0, .5)/*الخلفيه شفافه */
 }
 .bigContainer{
-    background: url(13.avif) no-repeat;
-    background-attachment: fixed;
+    background: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full%20page/img%20%283%29.jpg")no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
     width:100vw;
     height: 100vh;
@@ -114,5 +116,5 @@ h5{ display: inline; color:white;}
 .h5{
     position:absolute;
     bottom: 7vh;
-    left: 45vw;
+    left: 43vw;
 }
