@@ -1,6 +1,6 @@
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+<meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log in</title>
@@ -66,5 +66,24 @@
 
     </div>
     </div>
+
+
+    <script>
+    function onSignIn(googleUser) {
+        const id_token = googleUser.getAuthResponse().id_token;
+        // console.log(id_token);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/login');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onload = function() {
+            console.log('Signed in as: ' + xhr.responseText);
+            if(xhr.responseText == 'success'){
+                signOut();
+                location.assign('/home')
+            }
+        };
+        xhr.send(JSON.stringify({token : id_token}));
+      }
+    </script>
   </body>
 </html>

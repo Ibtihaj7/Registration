@@ -59,7 +59,7 @@ exports.register = (req,res) => {
             if(err){
                 throw err;
             }else{
-                return res.render('home')
+                return res.render('comfirm')
             }
         });
     }
