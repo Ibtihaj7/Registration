@@ -1,21 +1,21 @@
 body{
-    font-family: 'Times New Roman', Times, serif;
+    font-family: "Rubik", sans-serif;
     background: url(13.avif);
     background: rgba(0, 0, 0, .5);/*الخلفيه شفافه */
     background-size: cover;
     padding: 0;
     margin: 0;
 }
+.signUp{position: relative;}
+
+.fixed{position:fixed;z-index: 1000;width: 100vw;top:-3vh;}
 .bigContainer{
     background: url(13.avif) no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    width:94vw;
-    height: 86vh;
-    margin-left: 3vw;
-    margin-top: 3vh;
+    width:100vw;
+    height: 100vh;
     box-shadow:  5px 5px 20px rgba(0, 0, 0, 0.8);
-    border-radius: 12px;
 
 }
 .whiteLine{
@@ -42,7 +42,7 @@ form{
     left: 50%;
     top: 50%;
     width: 40vw;
-    height:60vh;
+    height:65vh;
     border-radius: 1px;
     background: rgba(0, 0, 0, .5)/*الخلفيه شفافه */
 }
@@ -73,37 +73,59 @@ input[type="text"],input[type="password"],input[type="email"]{
     color: aliceblue;  
     margin-left: 2.5vw;
 }
-input[type="submit"]{
+input[type="submit"], .google{
     width: 38vw;
     height: 6vh;
     margin-top: 13vh;
-    background-color: rgb(250, 250, 250);
+    background-color: rgb(250, 250, 250) ;
     color: black;
     margin-left: 1vw;
     cursor: pointer;
+    border: none;;
+    border-radius: 20px;
+    /* background: none; */
+}
+.google{
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
 }
 .remember{
     margin-top: 2vh;
-    color: #d1d0d0;
    position: absolute;
    padding: 15px;
 }
-#color{
-    background-color: #563d7c;
-    color:white;
-}
-.remember a{
-   margin-left: 20vw;
-}
+
+
 .fa{
     padding: 8px 16px;
     color: #5f5f5f;
 }
-h5{
-    display: inline;
+
+.bigDiv{
+    margin-top: 5px;
+    width: 38vw;
+    display: flex;
+    height: 6vh;
+    justify-content:space-around;
+    margin-left: auto;
+    margin-right: auto;
 }
-.font{
-    margin-top:5vh;
-    text-align: center;
-    margin-bottom: 0;
+.div1{
+    width: 17vw;
+    height: 1px;
+    margin-top: 2vh;
+    border: 1px solid #9ca1a1;
+    color: #9ca1a1;
+}
+.center{
+    font-size: 18px;
+    color: #9ca1a1;
+
+}
+h5{ display: inline; }
+.h5{
+    position:absolute;
+    bottom: 10vh;
+    left: 45vw;
 }
