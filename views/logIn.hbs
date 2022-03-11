@@ -1,6 +1,6 @@
 <html lang="en">
   <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Log in</title>
@@ -30,13 +30,12 @@
       <h4 class="alert alert-danger mt-4 fixed">{{message}}</h4>
   {{/if}}
 
-
 <div class="bigContainer">
     <div class="logIn ">
       <form action="/auth2/user" method="POST">
         <h1>Developer</h1>
 <div class="whiteLine">
-        <label>E-mail</label>
+        <label>User name Or E-mail</label>
         <input type="email" placeholder="E-mail" name="email" id="email" />
         <i style="font-size:17px" class="fa">&#xf2bd;</i>
 </div>
@@ -46,7 +45,7 @@
         <i style="font-size:17px" class="fa">&#xf023;</i>
 </div>
         <div class="remember">
-          <a href="/">Forget Password?</a>
+          <a href="url">Forget Password?</a>
         </div>
 
         <input type="submit" value="SIGN IN" />
@@ -69,6 +68,15 @@
 
 
     <script>
+    function signOut() {
+        const auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+        console.log('User signed out.');
+        });
+    }
+    </script>
+
+    <script>
     function onSignIn(googleUser) {
         const id_token = googleUser.getAuthResponse().id_token;
         // console.log(id_token);
@@ -85,5 +93,6 @@
         xhr.send(JSON.stringify({token : id_token}));
       }
     </script>
+
   </body>
 </html>

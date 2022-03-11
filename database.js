@@ -2,8 +2,11 @@ const express=require('express');
 const path = require('path');
 const mysql=require('mysql');
 
+
+
 const app=express();
 app.set('view engine','hbs');
+
 
 let db = mysql.createConnection({
     host:'localhost',
@@ -25,10 +28,10 @@ db.connect((err)=>{
     }
 })
 
+
 app.use('/',require('./routes/pages'));
 app.use('/auth',require('./routes/auth'));
 app.use('/auth2',require('./routes/user'));
-
 //Google Auth
 const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID = '19764794757-iugiaojkkgvkugjg7n6ti1718ejilckl.apps.googleusercontent.com'
@@ -53,6 +56,8 @@ app.post('/login', (req,res)=>{
       .catch(console.error);
 
 })
+
+
 
 app.listen(5001,() => {
     console.log('app is listening port 5001');  

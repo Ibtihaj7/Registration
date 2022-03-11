@@ -1,6 +1,6 @@
-const express = require("express");
 const mysql = require("mysql");
-const bcrypt = require("bcryptjs");
+const express = require("express");
+const bcrypt = require('bcryptjs');
 const app = express();
 
 app.set("view engine", "hbs");
@@ -12,16 +12,23 @@ const db = mysql.createConnection({
   password: "",
   database: "sign_up",
 });
-exports.login = (req, res) => {
+
+exports.register = (req, res) => {
+//   console.log(req.body);
+
   const email = req.body.email;
   const password = req.body.password;
-  db.query( "select * From users where email = ? and password = ?",[email, password],(err, res) => {
-      if (err) throw err;
-      if (results.length && bcrypt.compareSync(password, results[0].password)) {
-        return res.render("home");
+  db.query("SELECT * FROM users WHERE email = ? ", [email], (error, results) => {
+      if (error) {
+        throw error;
+      }
+      if (results.length  && bcrypt.compareSync(password,results[0].password)) {
+        return res.render("home",{
+            message:false
+        });
       } else {
         return res.render("logIn", {
-          message: "password or email is incorrect",
+          message: "password or email is incorrect"
         });
       }
     }

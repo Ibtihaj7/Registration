@@ -1,20 +1,25 @@
+// const cookieParser = require('cookie-parser');
 const express = require('express');
 const router = express.Router();
-const cookieParser = require('cookie-parser');
-
-router.use(express.json());
-router.use(cookieParser());
 
 const app = express();
 app.set('view engine','hbs')
 
 router.get('/',(req,res) => {
-    res.render('logIn'); 
+    res.render('logIn',{
+        message:false
+    }); 
 });
+// router.use(express.json());
+// router.use(cookieParser());
 
 router.get('/register',(req,res) => {
-    res.render('signUp'); 
+    res.render('signUp',{
+        message:false
+    }); 
 });
+
+
 router.get('/user',(req,res) => {
     res.render('logIn',{
         message:false
@@ -66,9 +71,10 @@ function checkAuthenticated(req, res, next){
       })
 
 }
-router.use((req,res) => {
-    res.status(404).send("soory,cant find that");
+// router.use((req,res) => {
+//     res.status(404).send("soory,cant find that");
     
-})
+// })
+
 
 module.exports = router;
