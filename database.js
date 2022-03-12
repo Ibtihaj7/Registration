@@ -32,6 +32,7 @@ db.connect((err)=>{
 app.use('/',require('./routes/pages'));
 app.use('/auth',require('./routes/auth'));
 app.use('/auth2',require('./routes/user'));
+app.use('/auth3',require('./routes/forget'));
 //Google Auth
 const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID = '19764794757-iugiaojkkgvkugjg7n6ti1718ejilckl.apps.googleusercontent.com'

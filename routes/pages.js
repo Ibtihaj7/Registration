@@ -10,6 +10,11 @@ router.get('/',(req,res) => {
         message:false
     }); 
 });
+router.get('/forget',(req,res) => {
+    res.render('forget',{
+        message:false
+    }); 
+});
 // router.use(express.json());
 // router.use(cookieParser());
 
