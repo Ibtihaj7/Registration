@@ -47,11 +47,11 @@ exports.register = (req,res) => {
             });
         }else if(!(regeEmail.test(email))){
             return res.render('signUp',{
-                message:"invalid Email"
+                message:"Please enter a valid email address"
             });            
         }else if(!(regePassword.test(password))){
             return res.render('signUp',{
-                message:"invalid password"
+                message:"Please enter a valid password, must include both lower and upper case charachter, at least one number or symbol,and at least 8 characters long"
             });
         }else{
         let hashedPassword = await bcrypt.hash(password , 8);
