@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const express=require('express');
 // const Connection = require('mysql/lib/Connection');
 const app=express();
-
+const nodemailer=require('nodemailer');
 const regeEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 const regePassword = /^(?=(.*[a-zA-Z]){1,})(?=(.*[0-9]){2,}).{8,}$/;
 
@@ -66,4 +66,19 @@ exports.register = (req,res) => {
         });
     }
     });
+    let code = randomize('0',6);
+     let transporter = nodemailer.createTransport({
+    service : "gmail",
+    auth: {
+      user: 'unstoppableteam826@gmail.com', 
+      pass: '123123unstoppableteam826', 
+    },
+  });
+
+  transporter.sendMail({
+    from: "unstoppableteam826@gmail.com",
+    to: req.body.email, 
+    subject: "Email code confirmation",
+    text: `${code}`,
+  })
 }
