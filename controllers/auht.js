@@ -5,6 +5,7 @@ const express=require('express');
 // const Connection = require('mysql/lib/Connection');
 const app=express();
 const nodemailer=require('nodemailer');
+const randomize = require('randomatic');
 const regeEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 const regePassword = /^(?=(.*[a-zA-Z]){1,})(?=(.*[0-9]){2,}).{8,}$/;
 
