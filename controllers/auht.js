@@ -1,14 +1,12 @@
 const mysql=require('mysql');
-// const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const express=require('express');
-// const Connection = require('mysql/lib/Connection');
+
 const app=express();
 const nodemailer=require('nodemailer');
 const randomize = require('randomatic');
 const regeEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 const regePassword = /^(?=(.*[a-zA-Z]){1,})(?=(.*[0-9]){2,}).{8,}$/;
-
 
 app.set('view engine','hbs');
 app.use(express.static('public'));
@@ -29,6 +27,9 @@ exports.register = (req,res) => {
     const password=req.body.password;
     const repassword=req.body.repassword;
 
+    exports.name = name;
+    exports.email = email;
+    exports.phone = phone;
 
     db.query('SELECT email FROM users WHERE email = ?',[email],async(error,results) => {
         if(error){
@@ -55,31 +56,26 @@ exports.register = (req,res) => {
                 message:"Please enter a valid password, must include both lower and upper case charachter, at least one number or symbol,and at least 8 characters long"
             });
         }else{
-        let hashedPassword = await bcrypt.hash(password , 8);
-        db.query('INSERT INTO users SET ?',{name:name,email:email,phone:phone,password:hashedPassword},(err,results) => {
-            if(err){
-                throw err;
-            }else{
-                return res.render('comfirm',{
-                    notDone:true
-                })
-            }
-        });
+            let hashedPassword = await bcrypt.hash(password , 8);
+            let code = randomize('0',6);
+            let transporter = nodemailer.createTransport({
+           service : "gmail",
+           auth: {
+             user: 'unstoppableteam826@gmail.com', 
+             pass: '123123unstoppableteam826', 
+           },
+         });
+       
+         transporter.sendMail({
+           from: "unstoppableteam826@gmail.com",
+           to: req.body.email, 
+           subject: "Email code confirmation",
+           text: `${code}`,
+         })
+         exports.code = code;
+         exports.hashedPassword = hashedPassword;
+         return res.render('comfirm')
     }
     });
-    let code = randomize('0',6);
-     let transporter = nodemailer.createTransport({
-    service : "gmail",
-    auth: {
-      user: 'unstoppableteam826@gmail.com', 
-      pass: '123123unstoppableteam826', 
-    },
-  });
-
-  transporter.sendMail({
-    from: "unstoppableteam826@gmail.com",
-    to: req.body.email, 
-    subject: "Email code confirmation",
-    text: `${code}`,
-  })
+   
 }
