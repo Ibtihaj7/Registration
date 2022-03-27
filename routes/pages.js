@@ -15,8 +15,54 @@ router.get('/forget',(req,res) => {
         message:false
     }); 
 });
-// router.use(express.json());
-// router.use(cookieParser());
+
+
+router.get('/register',(req,res) => {
+    res.render('signUp',{
+        message:false
+    }); 
+});
+
+
+router.get('/user',(req,res) => {
+    res.render('logIn',{
+        message:false
+    }); 
+});
+router.get('/home',(req,res) => {
+    let user = req.user;
+    res.render('home',{user }); 
+});
+
+router.get('/profile', checkAuthenticated, (req, res)=>{
+    let user = req.user;
+    res.render('home', {user});
+})
+
+router.get('/protectedRoute', checkAuthenticated, (req,res)=>{
+    res.send('This route is protected');
+})
+
+router.get('/logout', (req, res)=>{
+    res.clearCookie('session-token');
+    res.redirect('/user')
+
+})
+router.get('/comfirm',(req,res) => {
+    res.render('comfirm',{
+        message:false
+    }); 
+});
+router.get('/new',(req,res) => {
+    res.render('newPassword',{
+        message:false
+    }); 
+});
+router.get('/changePas',(req,res) => {
+    res.render('changePas',{
+        message:false
+    }); 
+});
 
 router.get('/register',(req,res) => {
     res.render('signUp',{
@@ -59,7 +105,7 @@ function checkAuthenticated(req, res, next){
     async function verify() {
         const ticket = await client.verifyIdToken({
             idToken: token,
-            audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+            audience: CLIENT_ID, 
         });
         const payload = ticket.getPayload();
         user.name = payload.name;
@@ -76,10 +122,5 @@ function checkAuthenticated(req, res, next){
       })
 
 }
-// router.use((req,res) => {
-//     res.status(404).send("soory,cant find that");
-    
-// })
-
 
 module.exports = router;
