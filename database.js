@@ -33,6 +33,9 @@ app.use('/',require('./routes/pages'));
 app.use('/auth',require('./routes/auth'));
 app.use('/auth2',require('./routes/user'));
 app.use('/auth3',require('./routes/forget'));
+app.use('/auth4',require('./routes/comfirm'));
+app.use('/auth5',require('./routes/change'));
+app.use('/auth6',require('./routes/new'));
 //Google Auth
 const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID = '19764794757-iugiaojkkgvkugjg7n6ti1718ejilckl.apps.googleusercontent.com'
@@ -61,5 +64,5 @@ app.post('/login', (req,res)=>{
 
 
 app.listen(5001,() => {
-    console.log('app is listening port 5001');  
+    console.log('app is listening port 5003');  
 });
