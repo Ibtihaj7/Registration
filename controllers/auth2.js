@@ -12,9 +12,7 @@ const db = mysql.createConnection({
   password: "",
   database: "sign_up",
 });
-
 exports.register = (req, res) => {
-//   console.log(req.body);
 
   const email = req.body.email;
   const password = req.body.password;
@@ -24,7 +22,7 @@ exports.register = (req, res) => {
       }
       if (results.length  && bcrypt.compareSync(password,results[0].password)) {
         return res.render("home",{
-            message:false
+            message:`welcome ${results[0].name}`
         });
       } else {
         return res.render("logIn", {
@@ -34,3 +32,4 @@ exports.register = (req, res) => {
     }
   );
 };
+
