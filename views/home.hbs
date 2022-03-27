@@ -12,11 +12,10 @@
     <link rel="stylesheet" href="/style.css" />
   </head>
   <body>
-          <div class="bigContainer">
-<h2 style="color:black;">welcome</h2>
-    {{#if user}}
-      <h4 class="alert alert-danger mt-4 fixe">welcome {{user.name}}</h4>
-    {{/if}}
+    <div class="bigContainer">
+      {{#if message}}
+        <div class="alert alert-dark" role="alert" style="text-align: center;"> {{message}} </div>
+      {{/if}}
     </div>
   </body>
 

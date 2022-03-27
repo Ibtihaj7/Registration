@@ -13,12 +13,12 @@
   </head>
   <body>
   <div class="bigContainer">
-       <form action="/auth4/comfirm" method="POST" ><br><br>
+      <form action="/auth5/change" method="POST" ><br><br>
           <label ><h2>we send a code on your email ,pleaze enter here to sure about email</h2></label>
             {{#if message}}
                 <h4 style="width: 90%!important; margin-left:auto;margin-right:auto;" class="alert alert-danger mt-4">{{message}}</h4>
             {{/if}}
-          <input style="padding: 15px;" type="text" placeholder="Enter the code here " name="code" >
+          <input style="padding: 15px;" type="text" placeholder="Enter the code here " name="change" >
           <br><br>
           <input type="submit" value="Submit">
       </form>
