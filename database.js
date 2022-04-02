@@ -2,11 +2,8 @@ const express=require('express');
 const path = require('path');
 const mysql=require('mysql');
 
-
-
 const app=express();
 app.set('view engine','hbs');
-
 
 let db = mysql.createConnection({
     host:'localhost',
@@ -28,7 +25,6 @@ db.connect((err)=>{
     }
 })
 
-
 app.use('/',require('./routes/pages'));
 app.use('/auth',require('./routes/auth'));
 app.use('/auth2',require('./routes/user'));
@@ -38,8 +34,9 @@ app.use('/auth5',require('./routes/change'));
 app.use('/auth6',require('./routes/new'));
 //Google Auth
 const {OAuth2Client} = require('google-auth-library');
-const CLIENT_ID = '19764794757-iugiaojkkgvkugjg7n6ti1718ejilckl.apps.googleusercontent.com'
+const CLIENT_ID = '19764794757-6ita4tcpu1erdunaci5vk8kbt2n10eoq.apps.googleusercontent.com'
 const client = new OAuth2Client(CLIENT_ID);
+
 
 app.post('/login', (req,res)=>{
     let token = req.body.token;
@@ -55,13 +52,11 @@ app.post('/login', (req,res)=>{
       verify()
       .then(()=>{
           res.cookie('session-token', token);
-          res.send('success')
+          res.send('success');
       })
       .catch(console.error);
 
 })
-
-
 
 app.listen(5001,() => {
     console.log('app is listening port 5003');  

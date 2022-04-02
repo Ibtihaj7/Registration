@@ -29,6 +29,10 @@ router.get('/user',(req,res) => {
         message:false
     }); 
 });
+router.post('/user',(req,res) => {
+    let token = req.body.token;
+    console.log(token);
+})
 router.get('/home',(req,res) => {
     let user = req.user;
     res.render('home',{user }); 
@@ -71,11 +75,7 @@ router.get('/register',(req,res) => {
 });
 
 
-router.get('/user',(req,res) => {
-    res.render('logIn',{
-        message:false
-    }); 
-});
+
 router.get('/home',(req,res) => {
     let user = req.user;
     res.render('home',{user }); 
