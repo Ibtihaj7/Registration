@@ -1,6 +1,8 @@
 const express=require('express');
 const path = require('path');
 const mysql=require('mysql');
+require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const app=express();
 app.set('view engine','hbs');
@@ -40,7 +42,10 @@ const client = new OAuth2Client(CLIENT_ID);
 
 app.post('/login', (req,res)=>{
     let token = req.body.token;
-
+    app.use(express.json());
+    app.use(cookieParser());
+    app.use(express.static('public'));
+    
     async function verify() {
         const ticket = await client.verifyIdToken({
             idToken: token,
@@ -57,6 +62,31 @@ app.post('/login', (req,res)=>{
       .catch(console.error);
 
 })
+function checkAuthenticated(req, res, next){
+
+    let token = req.cookies['session-token'];
+
+    let user = {};
+    async function verify() {
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
+        });
+        const payload = ticket.getPayload();
+        user.name = payload.name;
+        user.email = payload.email;
+        user.picture = payload.picture;
+      }
+      verify()
+      .then(()=>{
+          req.user = user;
+          next();
+      })
+      .catch(err=>{
+          res.redirect('/login')
+      })
+
+}
 
 app.listen(5001,() => {
     console.log('app is listening port 5003');  
