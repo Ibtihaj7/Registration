@@ -39,12 +39,13 @@ const {OAuth2Client} = require('google-auth-library');
 const CLIENT_ID = '19764794757-6ita4tcpu1erdunaci5vk8kbt2n10eoq.apps.googleusercontent.com'
 const client = new OAuth2Client(CLIENT_ID);
 
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.static('public'));
 
 app.post('/login', (req,res)=>{
     let token = req.body.token;
-    app.use(express.json());
-    app.use(cookieParser());
-    app.use(express.static('public'));
+
     
     async function verify() {
         const ticket = await client.verifyIdToken({
